@@ -1,7 +1,5 @@
-import React from "react";
-
 import { Form } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import React from "react";
 import {
   createLabel,
   CustomizeButton,
@@ -10,10 +8,13 @@ import {
   CustomizePasswordInput,
 } from "../../Styles/Form.styled";
 
-const FormLogIn = () => {
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
+const FormSignUp = () => {
   const onFinish = (values) => {
     console.log(values);
   };
+
   return (
     <Form
       name="normal_login"
@@ -25,6 +26,30 @@ const FormLogIn = () => {
       }}
       onFinish={onFinish}
     >
+      <Form.Item
+        name="name"
+        label={createLabel("NAME")}
+        rules={[
+          {
+            required: true,
+            message: "Please input your email address!",
+          },
+        ]}
+      >
+        <CustomizeInput placeholder="Your name" />
+      </Form.Item>
+      <Form.Item
+        name="surname"
+        label={createLabel("SURNAME")}
+        rules={[
+          {
+            required: true,
+            message: "Please input your email address!",
+          },
+        ]}
+      >
+        <CustomizeInput placeholder="Your surname" />
+      </Form.Item>
       <Form.Item
         name="email"
         label={createLabel("EMAIL")}
@@ -39,7 +64,7 @@ const FormLogIn = () => {
       </Form.Item>
       <Form.Item
         name="password"
-        label={createLabel("PASSWORD", true)}
+        label={createLabel("PASSWORD")}
         rules={[
           {
             required: true,
@@ -63,11 +88,11 @@ const FormLogIn = () => {
 
       <Form.Item>
         <CustomizeButton type="primary" htmlType="submit">
-          Log in
+          Sign up
         </CustomizeButton>
       </Form.Item>
     </Form>
   );
 };
 
-export default FormLogIn;
+export default FormSignUp;

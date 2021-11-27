@@ -1,6 +1,25 @@
 import styled, { css } from "styled-components";
 import { Input, Button, Checkbox } from "antd";
 
+export const createLabel = (text, password) =>
+password ? (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "100%",
+    }}
+  >
+    <Label>{text}</Label>
+    <Label password>
+      <a>Forgot password?</a>
+    </Label>
+  </div>
+) : (
+  <Label>{text}</Label>
+);
+
 export const CustomizeInput = styled(Input)`
   height: 50px;
   border-radius: 8px;
@@ -51,4 +70,10 @@ export const CustomizeCheckbox = styled(Checkbox)`
   & input:hover {
     border-color: #1faa00;
   }
+`;
+
+export const Label = styled.div`
+  color: #a4a6b3;
+  font-size: 12px;
+  font-weight: ${(props) => (props.password ? "" : "bold")};
 `;

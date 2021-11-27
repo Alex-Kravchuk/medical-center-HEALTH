@@ -13,7 +13,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
+    background: #dcd8cf;
   }
+  .ant-form-vertical .ant-form-item-label > label {
+    height: auto;
+    width: 100%;
+}
 `;
 
 ReactDOM.render(

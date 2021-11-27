@@ -3,7 +3,7 @@ import React from "react";
 import logInIcon from "../../../../images/health-insurance.png";
 import { Header, Icon, SubTitle, Title } from "../../Styles/Header.styled";
 
-const HeaderLogIn = () => {
+const HeaderSignUp = () => {
   return (
     <Header>
       <Icon src={logInIcon} alt="medical-care" />
@@ -15,14 +15,14 @@ const HeaderLogIn = () => {
       </Title>
       <SubTitle>
         <p style={{ fontSize: "30px", color: "#000", fontWeight: "bold" }}>
-          Log In to medical center
+          WELCOME
         </p>
         <p style={{ fontSize: "16px", color: "#A4A6B3" }}>
-          Enter your email and password below
+          Please fill the fields below
         </p>
       </SubTitle>
     </Header>
   );
 };
 
-export default HeaderLogIn;
+export default HeaderSignUp;

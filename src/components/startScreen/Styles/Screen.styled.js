@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 70%;
-  width: 30%;
+  height: auto;
+  width: 30vw;
   background: #fff;
   position: absolute;
   top: 50%;
@@ -13,7 +14,7 @@ export const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   border-radius: 10px;
   box-shadow: 0 0 15px #fff;
-  border: 1px solid black;
+  border: 1px solid #bfbfbf;
 `;
 
 export const Container = styled.div`
@@ -28,9 +29,14 @@ export const Container = styled.div`
 export const DontHaveAccount = styled.p`
   color: #9fa2b4;
   font-size: 16px;
+`;
 
-  span {
-    color: #1faa00;
-    font-weight: bold;
+export const CustomizeLink = styled(Link)`
+  color: #1faa00;
+  font-weight: bold;
+  transition: 0.2s all ease;
+
+  &:hover {
+    color: #64dd17;
   }
 `;

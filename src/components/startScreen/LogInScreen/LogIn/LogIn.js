@@ -2,7 +2,12 @@ import React from "react";
 
 import FormLogIn from "../FormLogIn/FormLogIn";
 import HeaderLogIn from "../HeaderLogIn/HeaderLogIn";
-import { Container, DontHaveAccount, Wrapper } from "./LogIn.styled";
+import {
+  Container,
+  CustomizeLink,
+  DontHaveAccount,
+  Wrapper,
+} from "../../Styles/Screen.styled";
 
 const LogIn = () => {
   return (
@@ -11,7 +16,8 @@ const LogIn = () => {
         <HeaderLogIn />
         <FormLogIn />
         <DontHaveAccount>
-          Don't have an account? <span>Sign up</span>
+          Don't have an account?{" "}
+          <CustomizeLink to="/signUp">Sign up</CustomizeLink>
         </DontHaveAccount>
       </Container>
     </Wrapper>
