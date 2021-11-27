@@ -1,29 +1,35 @@
 import styled, { css } from "styled-components";
 import { Input, Button, Checkbox } from "antd";
+import { deviceMaxHeight } from "./mediaQueries";
 
 export const createLabel = (text, password) =>
-password ? (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      width: "100%",
-    }}
-  >
+  password ? (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      <Label>{text}</Label>
+      <Label password>
+        <a>Forgot password?</a>
+      </Label>
+    </div>
+  ) : (
     <Label>{text}</Label>
-    <Label password>
-      <a>Forgot password?</a>
-    </Label>
-  </div>
-) : (
-  <Label>{text}</Label>
-);
+  );
 
 export const CustomizeInput = styled(Input)`
   height: 50px;
   border-radius: 8px;
   background: #f7f7fb;
+
+  @media (max-height: 700px) {
+    height: 40px;
+  }
+  
 `;
 
 export const CustomizePasswordInput = styled(Input.Password)`
@@ -32,6 +38,10 @@ export const CustomizePasswordInput = styled(Input.Password)`
   background: #f0f1f7;
   input {
     background: #f0f1f7;
+  }
+
+  @media (max-height: 700px) {
+    height: 40px;
   }
 `;
 

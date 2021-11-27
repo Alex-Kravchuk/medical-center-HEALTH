@@ -12,7 +12,7 @@ import HeaderSignUp from "../HeaderSignUp/HeaderSignUp";
 
 const SignUp = () => {
   return (
-    <Wrapper>
+    <Wrapper signUp>
       <Container>
         <HeaderSignUp />
         <FormSignUp />
