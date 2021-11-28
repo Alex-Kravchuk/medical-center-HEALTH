@@ -26,7 +26,16 @@ export const Wrapper = styled.div`
     width: 80vw;
   }
 
-  @media ${deviceMinWidth.tablet} {
+
+  @media ${deviceMaxWidth.mobileL} {
+    width: 100vw;
+  }
+
+  @media (min-height: 600px) {
+    height: ${(props) => (props.signUp ? "" : "100vh")};
+  }
+
+    @media ${deviceMinWidth.tablet} {
     ${(props) =>
       !props.signUp &&
       css`
@@ -34,12 +43,8 @@ export const Wrapper = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        height: auto;
       `}
-  }
-
-  @media ${deviceMaxWidth.mobileL} {
-    width: 100vw;
-    height: ${(props) => (props.signUp ? "" : "100vh")};
   }
 `;
 
