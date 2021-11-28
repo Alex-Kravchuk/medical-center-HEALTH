@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { deviceMinWidth, deviceMaxWidth } from "./mediaQueries";
+import { deviceMaxWidth, deviceMinWidth } from "./mediaQueries";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -26,8 +26,20 @@ export const Wrapper = styled.div`
     width: 80vw;
   }
 
+  @media ${deviceMinWidth.tablet} {
+    ${(props) =>
+      !props.signUp &&
+      css`
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      `}
+  }
+
   @media ${deviceMaxWidth.mobileL} {
     width: 100vw;
+    height: ${(props) => (props.signUp ? "" : "100vh")};
   }
 `;
 
@@ -37,14 +49,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  // @media (max-width: 544px) and ${deviceMinWidth.mobileM} {
-  //   width: 90%;
-  // }
-
-  // @media ${deviceMaxWidth.mobileM} {
-  //   width: 90%;
-  // }
 `;
 
 export const DontHaveAccount = styled.p`

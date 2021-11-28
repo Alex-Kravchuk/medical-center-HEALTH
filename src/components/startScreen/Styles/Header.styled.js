@@ -34,16 +34,7 @@ export const Title = styled.div`
     font-size: 22px;
   }
 
-  @media ${deviceMaxWidth.mobileM} {
-    p:nth-child(1) {
-      margin: 0;
-      font-size: 20px;
-    }
 
-    p {
-      font-size: 28px;
-    }
-  }
 
   @media (max-width: 330px) {
     p:nth-child(1) {
@@ -61,7 +52,7 @@ export const Title = styled.div`
     }
 
     p {
-      font-size: 36px;
+      font-size: 38px;
     }
   }
 
@@ -87,6 +78,16 @@ export const Title = styled.div`
       font-size: 20px;
     }
   }
+
+  @media ${deviceMaxWidth.mobileM} {
+    p:nth-child(1) {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 28px;
+    }
   }
 `;
 
@@ -141,15 +142,14 @@ export const SubTitle = styled.div`
     }
 
     p:nth-child(1) {
-      padding: 25px 0 0 0;
-      font-size: 32px;
+      padding: 0;
+      font-size: 30px;
     }
   }
 
   @media (max-height: 900px) {
     p {
       font-size: 20px;
-      padding: 0;
     }
 
     p:nth-child(1) {
@@ -161,12 +161,26 @@ export const SubTitle = styled.div`
   @media (max-height: 650px) {
     p {
       font-size: 14px;
-      padding: 0;
     }
 
     p:nth-child(1) {
       padding: 0;
       font-size: 20px;
     }
+  }
+
+  @media ${deviceMaxWidth.mobileM} {
+    p:nth-child(1) {
+      font-size: 24px;
+      padding: 0;
+    }
+  }
+
+  @media ${deviceMaxWidth.mobileL} {
+    padding: 0 0 50px 0;
+  }
+
+  @media ${deviceMinWidth.tablet} {
+    padding: 0 0 50px 0;
   }
 `;

@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { Input, Button, Checkbox } from "antd";
-import { deviceMaxHeight } from "./mediaQueries";
 
 export const createLabel = (text, password) =>
   password ? (
