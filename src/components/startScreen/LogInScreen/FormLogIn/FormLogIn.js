@@ -1,7 +1,11 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+
+
 import { Form } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
 import {
   createLabel,
   CustomizeButton,
@@ -9,10 +13,14 @@ import {
   CustomizeInput,
   CustomizePasswordInput,
 } from "../../Styles/Form.styled";
+import { signIn } from "../../../../redux/authReducer/authReducer";
 
 const FormLogIn = () => {
+  const dispatch = useDispatch();
+
   const onFinish = (values) => {
     console.log(values);
+    dispatch(signIn(values));
   };
   return (
     <Form
@@ -62,9 +70,9 @@ const FormLogIn = () => {
       </Form.Item>
 
       <Form.Item>
-        <CustomizeButton type="primary" htmlType="submit">
-          Log in
-        </CustomizeButton>
+          <CustomizeButton type="primary" htmlType="submit">
+            Log in
+          </CustomizeButton>
       </Form.Item>
     </Form>
   );

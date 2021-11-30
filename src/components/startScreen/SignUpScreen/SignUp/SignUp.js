@@ -18,7 +18,7 @@ const SignUp = () => {
         <FormSignUp />
         <DontHaveAccount>
           Already have an account?{" "}
-          <CustomizeLink to="/logIn">Log in</CustomizeLink>
+          <CustomizeLink to="/">Log in</CustomizeLink>
         </DontHaveAccount>
       </Container>
     </Wrapper>

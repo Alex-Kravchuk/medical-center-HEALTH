@@ -1,18 +1,17 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import Home from "./components/mainScreen/Home";
 
 import LogIn from "./components/startScreen/LogInScreen/LogIn/LogIn";
 import SignUp from "./components/startScreen/SignUpScreen/SignUp/SignUp";
-import { deviceMinWidth } from "./components/startScreen/Styles/mediaQueries";
+
+import RequireAuth from "./components/hoc/RequireAuth";
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media ${deviceMinWidth.tablet} {
-    padding: 20px 0;
-  }
 `;
 
 function App() {
@@ -20,9 +19,16 @@ function App() {
     <Wrapper>
       <HashRouter>
         <Routes>
-          <Route path="/" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="/logIn" element={<LogIn />} />
+          <Route path="/" element={<LogIn />} />
+          <Route
+            path="/home"
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </HashRouter>
     </Wrapper>

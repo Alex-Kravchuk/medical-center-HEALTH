@@ -26,7 +26,6 @@ export const Wrapper = styled.div`
     width: 80vw;
   }
 
-
   @media ${deviceMaxWidth.mobileL} {
     width: 100vw;
   }
@@ -35,7 +34,11 @@ export const Wrapper = styled.div`
     height: ${(props) => (props.signUp ? "" : "100vh")};
   }
 
-    @media ${deviceMinWidth.tablet} {
+  @media ${deviceMinWidth.tablet} {
+    margin: 20px 0;
+  }
+
+  @media ${deviceMinWidth.tablet} {
     ${(props) =>
       !props.signUp &&
       css`
