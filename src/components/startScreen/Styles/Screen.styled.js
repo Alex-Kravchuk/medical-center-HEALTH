@@ -57,6 +57,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  opacity: ${(props) => (props.loading ? "0.3" : "1")};
 `;
 
 export const DontHaveAccount = styled.p`
@@ -72,4 +73,11 @@ export const CustomizeLink = styled(Link)`
   &:hover {
     color: #64dd17;
   }
+`;
+
+export const LoadingScreen = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

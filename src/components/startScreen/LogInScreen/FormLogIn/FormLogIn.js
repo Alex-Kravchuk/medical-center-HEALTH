@@ -2,7 +2,6 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 
-
 import { Form } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -14,13 +13,17 @@ import {
   CustomizePasswordInput,
 } from "../../Styles/Form.styled";
 import { signIn } from "../../../../redux/authReducer/authReducer";
+import { fetchUser } from "../../../../redux/authReducer/fetchUserLogIn/fetchUser";
+import { getDataFromDataBase } from "../../../../firebase/getDataFromDataBase";
 
-const FormLogIn = () => {
+const FormLogIn = ({ loading }) => {
   const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    console.log(values);
-    dispatch(signIn(values));
+    const { email, password } = values;
+    // console.log(values);
+    dispatch(fetchUser(values));
+    // getDataFromDataBase();
   };
   return (
     <Form
@@ -70,9 +73,9 @@ const FormLogIn = () => {
       </Form.Item>
 
       <Form.Item>
-          <CustomizeButton type="primary" htmlType="submit">
-            Log in
-          </CustomizeButton>
+        <CustomizeButton type="primary" htmlType="submit" disabled={loading}>
+          Log in
+        </CustomizeButton>
       </Form.Item>
     </Form>
   );

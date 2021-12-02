@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { user as fakeUser } from "../../mock/fakeUser";
+import { fetchUser } from "./fetchUserLogIn/fetchUser";
 
 const initialState = {
   loading: false,
@@ -32,6 +33,28 @@ export const authSlice = createSlice({
       state.atention = false;
       state.loading = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUser.pending, (state) => {
+      state.atention = false;
+      state.loading = true;
+    });
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      debugger;
+      const { data, status } = action.payload;
+      if (status === 200) {
+        state.user = data.user;
+      } else {
+        state.atention = true;
+      }
+
+      state.loading = false;
+    });
+    builder.addCase(fetchUser.rejected, (state, action) => {
+      state.loading = false;
+      state.atention = true;
+      state.user = null;
+    });
   },
 });
 

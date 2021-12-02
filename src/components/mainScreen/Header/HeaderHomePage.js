@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button, Badge, Tooltip } from "antd";
 import { BellOutlined } from "@ant-design/icons";
@@ -18,12 +18,16 @@ import {
 import doctor from "../../../images/doctor.png";
 import { logOut } from "../../../redux/authReducer/authReducer";
 
-const HeaderHomePage = () => {
+const HeaderHomePage = ({ collapse }) => {
+  const { name, surname } = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const logOutHandler = () => dispatch(logOut());
 
   return (
-    <CustomizeHeaderHomePage className="site-layout-background">
+    <CustomizeHeaderHomePage
+      className="site-layout-background"
+      collapse={collapse}
+    >
       <Wrapper>
         <PageName>Addmissions</PageName>
         <AboutUser>
@@ -35,7 +39,9 @@ const HeaderHomePage = () => {
             </HeaderNotification>
           </Tooltip>
 
-          <UserName>Alex Kravchuk</UserName>
+          <UserName>
+            {name} {surname}
+          </UserName>
           <Tooltip placement="bottom" title="Profile">
             <CustomAvatar
               user="true"

@@ -6,6 +6,7 @@ import SideBarMenu from "./Menu/SideBarMenu";
 import HeaderIcon from "./Menu/HeaderIcon/HeaderIcon";
 import SliderTrigger from "./Menu/SliderTrigger/SliderTrigger";
 import HeaderHomePage from "./Header/HeaderHomePage";
+import Admissions from "./Admissions/Admissions";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -22,24 +23,35 @@ const Home = () => {
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}
-        style={{ background: "#e1e5f2" }}
+        style={{
+          background: "#e1e5f2",
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+        }}
         trigger={<SliderTrigger collapsed={collapsed} />}
       >
         <HeaderIcon collapse={collapsed} />
         <SideBarMenu />
       </Sider>
-      <Layout className="site-layout" style={{ background: "#fff" }}>
-        <HeaderHomePage />
-        <Content style={{ margin: "0 16px", background: "#fff" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+      <Layout
+        className="site-layout"
+        style={{ background: "#fff", marginLeft: collapsed ? 80 : 200, transition: '0.2s all ease' }}
+      >
+        <HeaderHomePage collapse={collapsed} />
+        <Content
+          style={{ margin: "0 16px", background: "#fff", overflow: "initial" }}
+        >
+          <Breadcrumb style={{ margin: "76px 0 0 0" }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background" style={{ minHeight: 360 }}>
-            Bill is a cat.
+            <Admissions />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
+        <Footer style={{ textAlign: "center", height: 40 }}>
           Ant Design ©2018 Created by Ant UED
         </Footer>
       </Layout>

@@ -7,6 +7,10 @@ export const CustomizeHeaderHomePage = styled(Header)`
   padding: 0;
   background: #e1e5f2;
   height: 60px;
+  position: fixed;
+  z-index: 222;
+  transition: .2s all ease;
+  width: ${(props) => (props.collapse ? "calc(100% - 80px)" : "calc(100% - 200px)")};
 `;
 
 export const Wrapper = styled.div`

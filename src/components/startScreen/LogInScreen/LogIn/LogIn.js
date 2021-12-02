@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import FormLogIn from "../FormLogIn/FormLogIn";
 import HeaderLogIn from "../HeaderLogIn/HeaderLogIn";
@@ -10,10 +11,11 @@ import {
   CustomizeLink,
   DontHaveAccount,
   Wrapper,
+  LoadingScreen,
 } from "../../Styles/Screen.styled";
 
 const LogIn = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading, atention } = useSelector((state) => state.auth);
   const location = useLocation();
   const navigate = useNavigate();
   const auth = user !== null;
@@ -27,14 +29,19 @@ const LogIn = () => {
 
   return (
     <Wrapper>
-      <Container>
-        <HeaderLogIn />
-        <FormLogIn />
+      <Container loading={loading}>
+        <HeaderLogIn innvalidLoginOrPassword={atention} />
+        <FormLogIn loading={loading} />
         <DontHaveAccount>
           Don't have an account?{" "}
           <CustomizeLink to="/signUp">Sign up</CustomizeLink>
         </DontHaveAccount>
       </Container>
+      {loading && (
+        <LoadingScreen>
+          <LoadingOutlined style={{ fontSize: "48px", color: "green" }} />
+        </LoadingScreen>
+      )}
     </Wrapper>
   );
 };

@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 
 import { createGlobalStyle } from "styled-components";
 
+
 import App from "./App";
 
 import "antd/dist/antd.css";
@@ -23,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
 }
 `;
+
 
 ReactDOM.render(
   <React.StrictMode>
