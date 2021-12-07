@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import { Layout, Breadcrumb } from "antd";
+import { Layout } from "antd";
 
-import SideBarMenu from "./Menu/SideBarMenu";
-import HeaderIcon from "./Menu/HeaderIcon/HeaderIcon";
-import SliderTrigger from "./Menu/SliderTrigger/SliderTrigger";
-import HeaderHomePage from "./Header/HeaderHomePage";
-import Admissions from "./Admissions/Admissions";
+import PageContent from "./PageContent";
+import SideBarMenu from "../Menu/SideBarMenu";
+import HeaderHomePage from "../Header/HeaderHomePage";
+import HeaderIcon from "../Menu/HeaderIcon/HeaderIcon";
+import SliderTrigger from "../Menu/SliderTrigger/SliderTrigger";
 
-const { Content, Footer, Sider } = Layout;
+const { Footer, Sider } = Layout;
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -37,20 +37,14 @@ const Home = () => {
       </Sider>
       <Layout
         className="site-layout"
-        style={{ background: "#fff", marginLeft: collapsed ? 80 : 200, transition: '0.2s all ease' }}
+        style={{
+          background: "#fff",
+          marginLeft: collapsed ? 80 : 200,
+          transition: "0.2s all ease",
+        }}
       >
         <HeaderHomePage collapse={collapsed} />
-        <Content
-          style={{ margin: "0 16px", background: "#fff", overflow: "initial" }}
-        >
-          <Breadcrumb style={{ margin: "76px 0 0 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div className="site-layout-background" style={{ minHeight: 360 }}>
-            <Admissions />
-          </div>
-        </Content>
+        <PageContent />
         <Footer style={{ textAlign: "center", height: 40 }}>
           Ant Design ©2018 Created by Ant UED
         </Footer>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 
 import {
   Table,
@@ -15,8 +16,9 @@ import {
 
 import moment from "moment";
 import { mutateDate } from "./mutateData";
-import { getDataFromDataBase } from "../../../firebase/getDataFromDataBase";
-import { setDataToDataBase } from "../../../firebase/setDataToDataBase";
+import { getDataFromDataBase } from "../../../../firebase/getDataFromDataBase";
+import { setDataToDataBase } from "../../../../firebase/setDataToDataBase";
+import { changePageName } from "../../../../redux/pageNameReducer/pageNameReducer";
 // import { useForm } from "antd/lib/form/Form";
 
 const EditableCell = ({
@@ -68,11 +70,17 @@ const EditableCell = ({
 };
 
 const Admissions = () => {
-  const { admissionsData } = useSelector((state) => state);
+  const location = useLocation();
+  const { admissions } = useSelector((state) => state.auth.user);
   const [form] = Form.useForm();
-  const [insideData, setData] = useState(mutateDate(admissionsData));
+  const [insideData, setData] = useState(mutateDate(admissions ?? []));
   const [editingKey, setEditingKey] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { pathname } = location;
+    dispatch(changePageName({ pathname }));
+  });
 
   const isEditing = (record) => record.key === editingKey;
 
@@ -274,16 +282,6 @@ const Admissions = () => {
           pageSize: 4,
         }}
       />
-      <button
-        onClick={() => {
-          console.log("start getting");
-
-          getDataFromDataBase("users2");
-          console.log("end getting");
-        }}
-      >
-        Click
-      </button>
     </Form>
   );
 };

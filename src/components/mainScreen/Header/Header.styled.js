@@ -9,8 +9,9 @@ export const CustomizeHeaderHomePage = styled(Header)`
   height: 60px;
   position: fixed;
   z-index: 222;
-  transition: .2s all ease;
-  width: ${(props) => (props.collapse ? "calc(100% - 80px)" : "calc(100% - 200px)")};
+  transition: 0.2s all ease;
+  width: ${(props) =>
+    props.collapse === "true" ? "calc(100% - 80px)" : "calc(100% - 200px)"};
 `;
 
 export const Wrapper = styled.div`

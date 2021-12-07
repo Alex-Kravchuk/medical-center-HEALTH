@@ -1,5 +1,8 @@
-import { Form } from "antd";
 import React from "react";
+
+import { Form } from "antd";
+import { useDispatch } from "react-redux";
+
 import {
   createLabel,
   CustomizeButton,
@@ -9,10 +12,13 @@ import {
 } from "../../Styles/Form.styled";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { signUpAction } from "../../../../redux/authReducer/actions/signUp";
 
 const FormSignUp = () => {
+  const dispatch = useDispatch();
   const onFinish = (values) => {
     console.log(values);
+    dispatch(signUpAction({ ...values, type: "signup" }));
   };
 
   return (

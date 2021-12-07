@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -11,34 +11,50 @@ import {
   Patien,
   Settings,
 } from "../../../fontawesome";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { autoSelectMenuItem } from "./AutoSelectMenuItem";
 
 const SideBarMenu = () => {
+  const { currentPage } = useSelector((state) => state);
+  const [selectedMenuItem, setSelected] = useState("1");
+
+  useEffect(() => {
+    const selectedItem = autoSelectMenuItem(currentPage).toString();
+    setSelected(selectedItem);
+  }, [currentPage]);
+
   const iconSize = { fontSize: "18px" };
   return (
-    <CustomizeMenu theme="light" mode="inline">
+    <CustomizeMenu
+      theme="light"
+      mode="inline"
+      selectedKeys={[selectedMenuItem]}
+    >
       <CustomizeMenuItem
         key="1"
         icon={<FontAwesomeIcon icon={Admissions} style={iconSize} />}
       >
-        Addmissions
+        <Link to="admissions">Addmissions</Link>
       </CustomizeMenuItem>
+
       <CustomizeMenuItem
         key="2"
         icon={<FontAwesomeIcon icon={Patien} style={iconSize} />}
       >
-        Patients
+        <Link to="patients"> Patients</Link>
       </CustomizeMenuItem>
       <CustomizeMenuItem
         key="3"
         icon={<FontAwesomeIcon icon={News} style={iconSize} />}
       >
-        News
+        <Link to="news">News</Link>
       </CustomizeMenuItem>
       <CustomizeMenuItem
         key="4"
         icon={<FontAwesomeIcon icon={Employees} style={iconSize} />}
       >
-        Employees
+        <Link to="employees">Employees</Link>
       </CustomizeMenuItem>
       <CustomizeMenuItem
         key="5"
@@ -46,13 +62,13 @@ const SideBarMenu = () => {
           <FontAwesomeIcon icon={About} style={iconSize} style={iconSize} />
         }
       >
-        About center
+        <Link to="about">About center</Link>
       </CustomizeMenuItem>
       <CustomizeMenuItem
         key="6"
         icon={<FontAwesomeIcon icon={Settings} style={iconSize} />}
       >
-        Settings
+        <Link to="settings">Settings</Link>
       </CustomizeMenuItem>
     </CustomizeMenu>
   );

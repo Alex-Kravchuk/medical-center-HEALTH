@@ -12,17 +12,17 @@ import {
   CustomizeInput,
   CustomizePasswordInput,
 } from "../../Styles/Form.styled";
-import { signIn } from "../../../../redux/authReducer/authReducer";
-import { fetchUser } from "../../../../redux/authReducer/fetchUserLogIn/fetchUser";
-import { getDataFromDataBase } from "../../../../firebase/getDataFromDataBase";
+
+import { logInAction } from "../../../../redux/authReducer/actions/logIn";
 
 const FormLogIn = ({ loading }) => {
   const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    const { email, password } = values;
-    // console.log(values);
-    dispatch(fetchUser(values));
+    console.log(values);
+
+    dispatch(logInAction({ ...values, type: "login" }));
+    // console.log(await sign(email, password), "fromform");
     // getDataFromDataBase();
   };
   return (

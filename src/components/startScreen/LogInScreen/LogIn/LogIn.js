@@ -22,14 +22,14 @@ const LogIn = () => {
 
   useEffect(() => {
     if (auth) {
-      navigate("/home", { replace: true, state: location });
+      navigate("/home/admissions", { replace: true, state: location });
       console.log(location);
     }
   });
 
   return (
     <Wrapper>
-      <Container loading={loading}>
+      <Container loading={loading.toString()}>
         <HeaderLogIn innvalidLoginOrPassword={atention} />
         <FormLogIn loading={loading} />
         <DontHaveAccount>

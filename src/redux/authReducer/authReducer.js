@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { user as fakeUser } from "../../mock/fakeUser";
-import { fetchUser } from "./fetchUserLogIn/fetchUser";
+import { logInAction } from "./actions/logIn";
+import { signUpAction } from "./actions/signUp";
+import { signOutAction } from "./actions/signOut";
 
 const initialState = {
   loading: false,
@@ -12,45 +13,63 @@ const initialState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    signIn(state, action) {
-      const { email, password, remember } = action.payload;
-      state.loading = true;
-
-      const checkEmail = fakeUser.email === email;
-      const checkPassword = fakeUser.password === password;
-
-      if (checkEmail && checkPassword) {
-        state.user = { email, password, remember };
-      } else {
-        state.atention = true;
-      }
-
-      state.loading = false;
-    },
-    logOut(state) {
-      state.user = null;
-      state.atention = false;
-      state.loading = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchUser.pending, (state) => {
+    // login actions
+    builder.addCase(logInAction.pending, (state) => {
       state.atention = false;
       state.loading = true;
     });
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      debugger;
-      const { data, status } = action.payload;
-      if (status === 200) {
-        state.user = data.user;
-      } else {
+    builder.addCase(logInAction.fulfilled, (state, action) => {
+      if (typeof action.payload === "string") {
         state.atention = true;
+      } else {
+        state.user = action.payload;
       }
 
       state.loading = false;
     });
-    builder.addCase(fetchUser.rejected, (state, action) => {
+    builder.addCase(logInAction.rejected, (state, action) => {
+      state.loading = false;
+      state.atention = true;
+      state.user = null;
+    });
+
+    // signup actions
+    builder.addCase(signUpAction.pending, (state) => {
+      state.atention = false;
+      state.loading = true;
+    });
+    builder.addCase(signUpAction.fulfilled, (state, action) => {
+      if (typeof action.payload === "string") {
+        state.atention = true;
+      } else {
+        state.user = action.payload;
+      }
+
+      state.loading = false;
+    });
+    builder.addCase(signUpAction.rejected, (state, action) => {
+      state.loading = false;
+      state.atention = true;
+      state.user = null;
+    });
+
+    // signOut actions
+    builder.addCase(signOutAction.pending, (state) => {
+      state.atention = false;
+      state.loading = true;
+    });
+    builder.addCase(signOutAction.fulfilled, (state, action) => {
+      if (typeof action.payload === "string") {
+        state.atention = true;
+      } else {
+        state.user = null;
+      }
+
+      state.loading = false;
+    });
+    builder.addCase(signOutAction.rejected, (state, action) => {
       state.loading = false;
       state.atention = true;
       state.user = null;
@@ -58,6 +77,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { signIn, logOut } = authSlice.actions;
+// export const { signIn, logOut } = authSlice.actions;
 
 export default authSlice.reducer;

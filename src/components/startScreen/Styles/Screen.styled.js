@@ -57,7 +57,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  opacity: ${(props) => (props.loading ? "0.3" : "1")};
+  opacity: ${(props) => (props.loading === 'true' ? "0.3" : "1")};
 `;
 
 export const DontHaveAccount = styled.p`
