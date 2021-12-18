@@ -10,6 +10,8 @@ import SliderTrigger from "../Menu/SliderTrigger/SliderTrigger";
 
 const { Footer, Sider } = Layout;
 
+// TODO to load some components with React.lazy
+
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
 

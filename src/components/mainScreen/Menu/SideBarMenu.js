@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FormOutlined } from "@ant-design/icons";
 
-import { CustomizeMenu, CustomizeMenuItem } from "./SideBarMenu.styled";
+import {
+  CustomizeMenu,
+  CustomizeMenuItem,
+  CustomizeSubMenu,
+} from "./SideBarMenu.styled";
+
 import {
   About,
   Admissions,
@@ -10,8 +16,9 @@ import {
   News,
   Patien,
   Settings,
+  SubSettings,
 } from "../../../fontawesome";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { autoSelectMenuItem } from "./AutoSelectMenuItem";
 
@@ -64,12 +71,18 @@ const SideBarMenu = () => {
       >
         <Link to="about">About center</Link>
       </CustomizeMenuItem>
-      <CustomizeMenuItem
-        key="6"
+      <CustomizeSubMenu
+        key="sub1"
         icon={<FontAwesomeIcon icon={Settings} style={iconSize} />}
+        title="Settings"
       >
-        <Link to="settings">Settings</Link>
-      </CustomizeMenuItem>
+        <CustomizeMenuItem
+          key="6"
+          icon={<FontAwesomeIcon icon={SubSettings} style={iconSize} />}
+        >
+          <Link to="settings/edit-profile"> Edit profile</Link>
+        </CustomizeMenuItem>
+      </CustomizeSubMenu>
     </CustomizeMenu>
   );
 };

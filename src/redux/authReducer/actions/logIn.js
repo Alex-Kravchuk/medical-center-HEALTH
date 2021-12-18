@@ -16,12 +16,12 @@ export const logInAction = createAsyncThunk(
 
     if (email === addminEmail) {
       const userData = await getDataFromDataBase("users/admin");
-      return userData;
+      return { ...userData, uid };
     }
 
     const userData = await getDataFromDataBase("users/clients/" + uid);
     if (userData) {
-      return userData;
+      return { ...userData, uid };
     }
 
     return response;

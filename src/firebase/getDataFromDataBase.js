@@ -1,4 +1,4 @@
-import { ref, child, get } from "firebase/database";
+import { ref, child, get, onValue } from "firebase/database";
 import { database } from ".";
 
 export const getDataFromDataBase = async (path) => {

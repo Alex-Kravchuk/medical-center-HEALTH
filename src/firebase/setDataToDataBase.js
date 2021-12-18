@@ -1,10 +1,17 @@
 import { ref, set } from "firebase/database";
 import { database } from ".";
 
-const db = database;
+export const setDataToDataBase = async (path, data) => {
+  let response;
+  await set(ref(database, path), data)
+    .then(async (res) => {
+      console.log("change data succsess", res);
+      response = true;
+    })
+    .catch(async (res) => {
+      console.log("change data with error", res);
+      response = false;
+    });
 
-export const setDataToDataBase = (path, data) => {
-  set(ref(db, path), data)
-    .then((res) => console.log(res))
-    .catch((res) => console.log(res));
+  return response;
 };

@@ -19,8 +19,9 @@ export const signUpAction = createAsyncThunk(
     await setDataToDataBase("users/clients/" + uid, { email, name, surname });
 
     const userData = await getDataFromDataBase("users/clients/" + uid);
+    debugger
     if (userData) {
-      return userData;
+      return {...userData, uid};
     }
 
     return response;

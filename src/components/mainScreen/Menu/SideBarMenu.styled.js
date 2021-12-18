@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const { SubMenu } = Menu;
+
 export const CustomizeMenu = styled(Menu)`
   background: #e1e5f2;
 `;
@@ -12,6 +14,13 @@ export const CustomizeMenuItem = styled(Menu.Item)`
     background: #fff;
   }
 
+  span {
+    color: #000;
+    font-size: 18px;
+  }
+`;
+
+export const CustomizeSubMenu = styled(SubMenu)`
   span {
     color: #000;
     font-size: 18px;

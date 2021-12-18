@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./components/mainScreen/Home/Home";
 
@@ -14,6 +14,7 @@ import Employees from "./components/mainScreen/Pages/Employees/Employees";
 import About from "./components/mainScreen/Pages/About/About";
 import Settings from "./components/mainScreen/Pages/Settings/Settings";
 import Profile from "./components/mainScreen/Pages/Profile/Profile";
+import EditProfile from "./components/mainScreen/Pages/Settings/EditProfile/EditProfile";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,8 +42,10 @@ function App() {
             <Route path="news" element={<News />} />
             <Route path="employees" element={<Employees />} />
             <Route path="about" element={<About />} />
-            <Route path="settings" element={<Settings />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} >
+              <Route path="edit-profile" element={<EditProfile />} />
+            </Route>
           </Route>
         </Routes>
       </HashRouter>

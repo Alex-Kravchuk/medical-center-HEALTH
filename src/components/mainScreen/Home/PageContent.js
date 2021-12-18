@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Layout, Breadcrumb } from "antd";
-import { Route, Routes } from "react-router";
+import { Route, Routes, Outlet } from "react-router";
 
 import News from "../Pages/News/News";
 import About from "../Pages/About/About";
@@ -10,6 +10,7 @@ import Settings from "../Pages/Settings/Settings";
 import Patients from "../Pages/Patients/Patients";
 import Employees from "../Pages/Employees/Employees";
 import Admissions from "../Pages/Admissions/Admissions";
+import EditProfile from "../Pages/Settings/EditProfile/EditProfile";
 
 const { Content } = Layout;
 
@@ -29,7 +30,9 @@ const PageContent = () => {
           <Route path="news" element={<News />} />
           <Route path="employees" element={<Employees />} />
           <Route path="about" element={<About />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings />}>
+              <Route path="edit-profile" element={<EditProfile />} />
+            </Route>
           <Route path="profile" element={<Profile />} />
         </Routes>
       </div>

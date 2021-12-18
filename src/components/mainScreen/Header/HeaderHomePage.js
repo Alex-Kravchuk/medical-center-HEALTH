@@ -15,14 +15,14 @@ import {
   CustomAvatar,
 } from "./Header.styled";
 
-import doctor from "../../../images/doctor.png";
+import photoNotFound from "../../../images/photo-not-found.png";
 import { signOutAction } from "../../../redux/authReducer/actions/signOut";
 import { Link } from "react-router-dom";
 
 const HeaderHomePage = ({ collapse }) => {
   const { user, loading, atention } = useSelector((state) => state.auth);
   const { currentPage } = useSelector((state) => state);
-  const { name, surname } = user;
+  const { name, surname, avatarURL } = user;
   const dispatch = useDispatch();
   const logOutHandler = () => {
     dispatch(signOutAction());
@@ -52,7 +52,13 @@ const HeaderHomePage = ({ collapse }) => {
               <CustomAvatar
                 user="true"
                 size="large"
-                icon={<img src={doctor} />}
+                icon={
+                  <img
+                    src={avatarURL ?? photoNotFound}
+                    alt="icon"
+                    placeholder={"loading"}
+                  />
+                }
               />
             </Link>
           </Tooltip>
