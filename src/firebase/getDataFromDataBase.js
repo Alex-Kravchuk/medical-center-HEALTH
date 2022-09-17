@@ -1,4 +1,4 @@
-import { ref, child, get, onValue } from "firebase/database";
+import { ref, child, get } from "firebase/database";
 import { database } from ".";
 
 export const getDataFromDataBase = async (path) => {
@@ -7,10 +7,7 @@ export const getDataFromDataBase = async (path) => {
   await get(child(dbRef, path))
     .then(async (snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
-
         data = await snapshot.val();
-        console.log(data, "data");
       } else {
         console.log("No data available");
       }

@@ -4,26 +4,37 @@ import { setDataToDataBase } from "../../../firebase/setDataToDataBase";
 
 import { signUp } from "../../../firebase/requestToFirebase";
 
+import { defineUserRole } from "../../../auxiliary functions/defineUserRole";
+import { defineTypeOfError } from "../../../auxiliary functions/defineTypeOfError";
 
 export const signUpAction = createAsyncThunk(
   "signUp",
-  async ({ email, password, name, surname }) => {
+  async ({ email, password, name, surname, specialization, role, type }) => {
+    const userRole = defineUserRole(role);
     let response = await signUp(email, password);
 
     if (typeof response === "string") {
-      return response;
+      return defineTypeOfError(response);
     }
 
     const { uid } = response;
 
-    await setDataToDataBase("users/clients/" + uid, { email, name, surname });
+    const newUserData = {
+      email,
+      name,
+      surname,
+      specialization: specialization ?? null,
+      role,
+      uid,
+    };
 
-    const userData = await getDataFromDataBase("users/clients/" + uid);
-    debugger
+    await setDataToDataBase(`users/${userRole}/` + uid, newUserData);
+
+    const userData = await getDataFromDataBase(`users/${userRole}/` + uid);
+
     if (userData) {
-      return {...userData, uid};
+      return { ...userData, uid, type };
     }
-
     return response;
   }
 );

@@ -16,14 +16,14 @@ export const CustomizeMenuItem = styled(Menu.Item)`
 
   span {
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 
 export const CustomizeSubMenu = styled(SubMenu)`
   span {
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 

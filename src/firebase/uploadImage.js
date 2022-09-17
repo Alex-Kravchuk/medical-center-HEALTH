@@ -1,8 +1,6 @@
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from ".";
 
-// загружаю фото
-// добавити placeholder коли немає фотки на акаунті
+import { storage } from ".";
 
 const metadata = {
   contentType: "image/jpeg",
@@ -10,7 +8,6 @@ const metadata = {
 
 export const uploadImage = async (file, saveUrl) => {
   console.log("start uploading");
-  let url;
 
   const storageRef = ref(storage, "images/" + file.name);
   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
@@ -28,6 +25,7 @@ export const uploadImage = async (file, saveUrl) => {
         case "running":
           console.log("Upload is running");
           break;
+        default:
       }
     },
     (error) => {
@@ -40,6 +38,7 @@ export const uploadImage = async (file, saveUrl) => {
           break;
         case "storage/unknown":
           break;
+        default:
       }
     },
     async () => {

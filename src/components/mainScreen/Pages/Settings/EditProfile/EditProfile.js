@@ -7,16 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../../../../firebase";
 
+import { defineUserRole } from "../../../../../auxiliary functions/defineUserRole";
+
 import { changeUserDataListener } from "../../../../../redux/authReducer/authReducer";
 import { resetState } from "../../../../../redux/changeUserDataReducer/changeUserDataReducer";
 import { changeProfileInfo } from "../../../../../redux/changeUserDataReducer/actions/changeProfileInfo";
 
 import EditProfileForm from "./EditProfileForm";
 import {
-  LoadingScreen,
-  sendingMessageConfig,
   Title,
   Wrapper,
+  LoadingScreen,
+  sendingMessageConfig,
 } from "./EditProfile.styled";
 
 const EditProfile = () => {
@@ -33,26 +35,31 @@ const EditProfile = () => {
     surname,
     uid,
     avatarURL,
+    role,
+    specialization,
+    feedbacks,
+    about,
+    appointments,
   } = useSelector((state) => state.auth.user);
+
+  const userRole = defineUserRole(role);
 
   useEffect(() => {
     dispatch(resetState());
-    // TODO path should be another, I have to define a correct path, when a user is client or doctor or admin
-    const dbRef = ref(database, "users/clients/" + uid);
+    const dbRef = ref(database, `users/${userRole}/` + uid);
 
     onValue(dbRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
         dispatch(changeUserDataListener({ ...data, uid, avatarURL }));
       }
-      //   probably, need some warning message here, when someting worng with fethcing
     });
   }, []);
 
   const onFinish = async (values) => {
     console.log("Success:", values);
 
-    const data = {
+    const userData = {
       name: values.name ?? null,
       surname: values.surname ?? null,
       email: values.email ?? null,
@@ -62,14 +69,21 @@ const EditProfile = () => {
       country: values.country ?? null,
       city: values.city ?? null,
       avatarURL: avatarURL ?? null,
+      role: role ?? null,
+      specialization: specialization ?? null,
+      about: values.about ?? null,
+      feedbacks: feedbacks ?? null,
+      appointments: appointments ?? null,
+      uid,
     };
 
     // if changing data finished with error(or successes), to show error(successes) message
-    const response = await dispatch(changeProfileInfo({ userID: uid, data }));
+    const response = await dispatch(changeProfileInfo({ userData, userRole }));
     const check = response.hasOwnProperty("error");
 
     if (check) {
       message.error(sendingMessageConfig("Error sending data"));
+      console.log(response);
     } else {
       message.success(sendingMessageConfig("Data successfully submitted"));
     }
@@ -88,6 +102,8 @@ const EditProfile = () => {
     phoneNumber,
     sex,
     surname,
+    specialization,
+    about,
   };
 
   return (
@@ -97,6 +113,7 @@ const EditProfile = () => {
         initialValues={initialValues}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        role={role}
       />
       {loading && (
         <LoadingScreen>

@@ -6,24 +6,28 @@ import { Form } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 import {
-  createLabel,
+  CustomizeInput,
   CustomizeButton,
   CustomizeCheckbox,
-  CustomizeInput,
   CustomizePasswordInput,
 } from "../../Styles/Form.styled";
 
+import CreateLabel from "../../CreateLabel";
+
 import { logInAction } from "../../../../redux/authReducer/actions/logIn";
+
+const INPUT_RULE = [
+  {
+    required: true,
+    message: "Please fill in this field",
+  },
+];
 
 const FormLogIn = ({ loading }) => {
   const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    console.log(values);
-
-    dispatch(logInAction({ ...values, type: "login" }));
-    // console.log(await sign(email, password), "fromform");
-    // getDataFromDataBase();
+    dispatch(logInAction({ ...values }));
   };
   return (
     <Form
@@ -38,25 +42,18 @@ const FormLogIn = ({ loading }) => {
     >
       <Form.Item
         name="email"
-        label={createLabel("EMAIL")}
-        rules={[
-          {
-            required: true,
-            message: "Please input your email address!",
-          },
-        ]}
+        label={<CreateLabel text="email" />}
+        rules={INPUT_RULE}
       >
-        <CustomizeInput placeholder="Email address" />
+        <CustomizeInput
+          placeholder="Email address"
+          autoComplete={"new-password"}
+        />
       </Form.Item>
       <Form.Item
         name="password"
-        label={createLabel("PASSWORD", true)}
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
+        label={<CreateLabel text="password" password />}
+        rules={INPUT_RULE}
       >
         <CustomizePasswordInput
           type="password"

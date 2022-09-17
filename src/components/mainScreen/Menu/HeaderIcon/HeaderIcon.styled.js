@@ -32,3 +32,5 @@ export const Icon = styled.img`
   transition: 0.5s all ease;
   width: 50px;
 `;
+
+export const Title = styled.span``;

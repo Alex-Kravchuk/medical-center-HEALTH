@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, message } from "antd";
+import { useDispatch } from "react-redux";
 import { UploadOutlined } from "@ant-design/icons";
 
-import {
-  AvatarInfoBlock,
-  CustomizeUpload,
-  ImageContainer,
-} from "./ProfileAvatar.styled";
-import Placeholder from "./Placeholder";
 import { uploadImage } from "../../../../../firebase/uploadImage";
-import { useDispatch, useSelector } from "react-redux";
-import { CustomeImage } from "./ProfileAvatar.styled";
+import { defineUserRole } from "../../../../../auxiliary functions/defineUserRole";
 
-import photoNotFound from "../../../../../images/photo-not-found.png";
 import { setDataToDataBase } from "../../../../../firebase/setDataToDataBase";
 import { updateAvatarURL } from "../../../../../redux/authReducer/authReducer";
 
-const ProfileAvatar = () => {
+import Placeholder from "./Placeholder";
+
+import {
+  ImageContainer,
+  AvatarInfoBlock,
+  CustomizeUpload,
+} from "./ProfileAvatar.styled";
+import { CustomeImage } from "./ProfileAvatar.styled";
+
+import photoNotFound from "../../../../../images/photo-not-found.png";
+
+const ProfileAvatar = ({ uid, avatarURL, role }) => {
   const dispatch = useDispatch();
-  const [avatarURLNotFound, setAvatarUrlNotFound] = useState(false);
-  const { avatarURL, uid } = useSelector((state) => state.auth.user);
+  const [avatarURLNotFound, setAvatarURLNotFound] = useState(false);
+
+  const userRole = defineUserRole(role);
 
   useEffect(() => {
     if (!avatarURL) {
-      setAvatarUrlNotFound(true);
+      setAvatarURLNotFound(true);
     }
   });
 
   const saveUrl = (url) => {
-    const path = "users/clients/" + uid + "/avatarURL";
+    const path = `users/${userRole}/` + uid + "/avatarURL";
     setDataToDataBase(path, url);
     dispatch(updateAvatarURL(url));
-    setAvatarUrlNotFound(false);
+    setAvatarURLNotFound(false);
   };
 
   const props = {
     name: "file",
-    // винести функцію вигрузки фото сюди, пропси можна викинути в окремий файл. після успішного отримання юрл пушити його в базу (сетдата)
     action: (file) => uploadImage(file, saveUrl),
     header: {
       authorization: "authorization-text",

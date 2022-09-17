@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LoadingOutlined } from "@ant-design/icons";
 
 import FormLogIn from "../FormLogIn/FormLogIn";
-import HeaderLogIn from "../HeaderLogIn/HeaderLogIn";
+
 import {
-  Container,
-  CustomizeLink,
-  DontHaveAccount,
   Wrapper,
+  Container,
+  LoadingIcon,
+  CustomizeLink,
   LoadingScreen,
+  DontHaveAccount,
 } from "../../Styles/Screen.styled";
+import ScreenHeader from "../../ScreeHeader/ScreenHeader";
 
 const LogIn = () => {
   const { user, loading, atention } = useSelector((state) => state.auth);
@@ -22,15 +23,24 @@ const LogIn = () => {
 
   useEffect(() => {
     if (auth) {
-      navigate("/home/admissions", { replace: true, state: location });
-      console.log(location);
+      redirectToHomePage();
     }
   });
 
+  const redirectToHomePage = () => {
+    const homePageAfterLogIn =
+      user.role !== "client" ? "admissions" : "appointments";
+
+    navigate(`/home/${homePageAfterLogIn}`, {
+      replace: true,
+      state: location,
+    });
+  };
+
   return (
     <Wrapper>
-      <Container loading={loading.toString()}>
-        <HeaderLogIn innvalidLoginOrPassword={atention} />
+      <Container>
+        <ScreenHeader error={atention} type="logIn" />
         <FormLogIn loading={loading} />
         <DontHaveAccount>
           Don't have an account?{" "}
@@ -38,8 +48,8 @@ const LogIn = () => {
         </DontHaveAccount>
       </Container>
       {loading && (
-        <LoadingScreen>
-          <LoadingOutlined style={{ fontSize: "48px", color: "green" }} />
+        <LoadingScreen loading={loading.toString()}>
+          <LoadingIcon />
         </LoadingScreen>
       )}
     </Wrapper>

@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-
-import { useSelector } from "react-redux";
-
-import { DataContainer, DataRow } from "./AboutUser.styled";
+import React from "react";
 
 import BlockOfDate from "./BlockOfData";
 
-const ProfileInfo = () => {
-  const {
-    name,
-    surname,
-    email,
-    phoneNumber,
-    dateOfBirth,
-    sex,
-    country,
-    city,
-    therapist,
-    role,
-  } = useSelector((state) => state.auth.user);
+import { DataContainer, DataRow } from "./AboutUser.styled";
 
+const ProfileInfo = ({
+  name,
+  surname,
+  email,
+  phoneNumber,
+  dateOfBirth,
+  sex,
+  country,
+  city,
+  role,
+  specialization,
+}) => {
   return (
     <DataContainer>
       <DataRow>
@@ -38,9 +34,10 @@ const ProfileInfo = () => {
         <BlockOfDate value={country} label="Country" />
         <BlockOfDate value={city} label="City" />
       </DataRow>
-      {role === "client" && (
+
+      {role === "doctor" && (
         <DataRow>
-          <BlockOfDate value={<a>{therapist}</a>} label="Therapist" />
+          <BlockOfDate value={specialization} label="Specialization" />
         </DataRow>
       )}
     </DataContainer>

@@ -1,8 +1,10 @@
 import React from "react";
 
-import { Form, Input, Button, Select, DatePicker } from "antd";
+import { Form, Input, Button } from "antd";
 
-const EditProfileForm = ({ initialValues, onFinish, onFinishFailed }) => {
+import { formItems } from "./formItems";
+
+const EditProfileForm = ({ initialValues, onFinish, onFinishFailed, role }) => {
   return (
     <Form
       name="basic"
@@ -18,35 +20,21 @@ const EditProfileForm = ({ initialValues, onFinish, onFinishFailed }) => {
       autoComplete="off"
       size="large"
     >
-      <Form.Item label="Name" name="name">
-        <Input />
-      </Form.Item>
-
-      <Form.Item label="Surname" name="surname">
-        <Input />
-      </Form.Item>
-
-      <Form.Item label="Email" name="email">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Phone number" name="phoneNumber">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Date of birth" name="dateOfBirth">
-        <DatePicker />
-      </Form.Item>
-      <Form.Item label="Sex" name="sex">
-        <Select>
-          <Select.Option key="Male">Male</Select.Option>
-          <Select.Option key="Female">Female</Select.Option>
-        </Select>
-      </Form.Item>
-      <Form.Item label="Country" name="country">
-        <Input />
-      </Form.Item>
-      <Form.Item label="City" name="city">
-        <Input />
-      </Form.Item>
+      {formItems.map(({ input, label, name }) => (
+        <Form.Item label={label} name={name} key={name}>
+          {input}
+        </Form.Item>
+      ))}
+      {role === "doctor" && (
+        <>
+          <Form.Item label="Specialization" name="specialization">
+            <Input />
+          </Form.Item>
+          <Form.Item label="About you" name="about">
+            <Input.TextArea />
+          </Form.Item>
+        </>
+      )}
 
       <Form.Item
         wrapperCol={{

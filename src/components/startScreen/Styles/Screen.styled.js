@@ -1,6 +1,9 @@
-import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
+
 import { deviceMaxWidth, deviceMinWidth } from "./mediaQueries";
+
+import { LoadingOutlined } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -57,7 +60,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  opacity: ${(props) => (props.loading === 'true' ? "0.3" : "1")};
+  opacity: ${(props) => (props.loading === "true" ? "0.3" : "1")};
 `;
 
 export const DontHaveAccount = styled.p`
@@ -77,7 +80,17 @@ export const CustomizeLink = styled(Link)`
 
 export const LoadingScreen = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  opacity: ${(props) => (props.loading === "true" ? "0.3" : "1")};
 `;
+
+export const LoadingIcon = styled(LoadingOutlined)`
+  font-size: 48px;
+  color: green;
+`;
+

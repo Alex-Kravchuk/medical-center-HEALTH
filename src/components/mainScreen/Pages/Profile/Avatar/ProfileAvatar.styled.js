@@ -12,8 +12,8 @@ export const CustomeImage = styled(Image)`
 `;
 
 export const PlaceholderWrapper = styled.div`
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

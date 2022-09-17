@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Container, Icon, Wrapper } from "./HeaderIcon.styled";
 import appIcon from "../../../../images/health-insurance.png";
+import { Container, Icon, Wrapper, Title } from "./HeaderIcon.styled";
 
 const HeaderIcon = ({ collapse }) => {
   return (
     <Wrapper>
       <Container collapse={collapse}>
         <Icon src={appIcon} alt="brand" collapse={collapse} />
-        <span>HEALTH</span>
+        <Title>HEALTH</Title>
       </Container>
     </Wrapper>
   );

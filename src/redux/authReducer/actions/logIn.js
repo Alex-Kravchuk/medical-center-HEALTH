@@ -1,25 +1,38 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getDataFromDataBase } from "../../../firebase/getDataFromDataBase";
 
 import { signIn } from "../../../firebase/requestToFirebase";
-const addminEmail = "sodasoad450@gmail.com";
+import { getDataFromDataBase } from "../../../firebase/getDataFromDataBase";
+
+import { defineTypeOfError } from "../../../auxiliary functions/defineTypeOfError";
 
 export const logInAction = createAsyncThunk(
   "logIn",
   async ({ email, password }) => {
+    let userData;
     let response = await signIn(email, password);
     const { uid } = response;
 
     if (typeof response === "string") {
-      return response;
+      return defineTypeOfError(response);
     }
 
-    if (email === addminEmail) {
-      const userData = await getDataFromDataBase("users/admin");
+    const inBlackList = await getDataFromDataBase("users/blacklist/" + uid);
+    if (inBlackList) {
+      return "Such a user no longer exists";
+    }
+
+    userData = await getDataFromDataBase("users/admin/" + uid);
+    if (userData) {
       return { ...userData, uid };
     }
 
-    const userData = await getDataFromDataBase("users/clients/" + uid);
+    userData = await getDataFromDataBase("users/clients/" + uid);
+    if (userData) {
+      return { ...userData, uid };
+    }
+
+    userData = await getDataFromDataBase("users/doctors/" + uid);
+
     if (userData) {
       return { ...userData, uid };
     }

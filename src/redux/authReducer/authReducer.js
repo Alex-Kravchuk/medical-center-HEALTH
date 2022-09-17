@@ -30,7 +30,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(logInAction.fulfilled, (state, action) => {
       if (typeof action.payload === "string") {
-        state.atention = true;
+        state.atention = action.payload;
       } else {
         state.user = action.payload;
       }
@@ -50,14 +50,19 @@ export const authSlice = createSlice({
     });
     builder.addCase(signUpAction.fulfilled, (state, action) => {
       if (typeof action.payload === "string") {
-        state.atention = true;
+        state.atention = action.payload;
       } else {
-        state.user = action.payload;
+        // I'm checking type of created user, and if he created like a doctor with type "creating"
+        // I don't change current user in the app
+        if (!action.payload.type) {
+          state.user = action.payload;
+        }
       }
 
       state.loading = false;
     });
     builder.addCase(signUpAction.rejected, (state, action) => {
+      debugger;
       state.loading = false;
       state.atention = true;
       state.user = null;

@@ -24,13 +24,15 @@ const HeaderHomePage = ({ collapse }) => {
   const { currentPage } = useSelector((state) => state);
   const { name, surname, avatarURL } = user;
   const dispatch = useDispatch();
+
   const logOutHandler = () => {
     dispatch(signOutAction());
   };
 
+  // TODO I'm gona make here some new logic for notification component
+
   return (
     <CustomizeHeaderHomePage
-      className="site-layout-background"
       collapse={collapse.toString()}
     >
       <Wrapper>

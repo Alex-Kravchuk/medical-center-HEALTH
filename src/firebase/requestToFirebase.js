@@ -1,8 +1,7 @@
 import {
-  getAuth,
+  signOut,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 
 import { auth } from ".";
@@ -12,13 +11,12 @@ export const signIn = async (email, password) => {
   await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user, "suc");
       response = user;
     })
     .catch((error) => {
       const errorMessage = error.message;
       response = errorMessage;
-      console.log(errorMessage, "er");
+      console.log(errorMessage, "error with sign in");
     });
 
   return response;
@@ -42,12 +40,11 @@ export const signUp = async (email, password) => {
 };
 
 export const signOutHandler = () => {
-   signOut(auth)
+  signOut(auth)
     .then((response) => {
       console.log(response, "suc");
     })
     .catch((error) => {
       console.log(error, "err");
     });
-
 };

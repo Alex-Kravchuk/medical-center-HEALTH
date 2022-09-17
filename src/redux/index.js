@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import admissionsReducer from "./admissionsRedcer/admissionsReducer";
 import authReducer from "./authReducer/authReducer";
-import changeUserData  from "./changeUserDataReducer/changeUserDataReducer";
 import pageNameReducer from "./pageNameReducer/pageNameReducer";
+import changeUserData from "./changeUserDataReducer/changeUserDataReducer";
+import makeAppointmentReducer from "./makeAppointmentReducer/makeAppointmentReducer";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     changingUserData: changeUserData,
-    admissionsData: admissionsReducer,
     currentPage: pageNameReducer,
+    makeAppointment: makeAppointmentReducer,
   },
 });

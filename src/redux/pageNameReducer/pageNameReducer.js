@@ -10,6 +10,15 @@ export const pageNameSlice = createSlice({
       const { pathname } = action.payload;
       let partsOfThePath = pathname.split("/");
       let currentPath = partsOfThePath[partsOfThePath.length - 1];
+      const pathContainsTwoWords = currentPath.includes("-");
+      if (pathContainsTwoWords) {
+        let currentPathWithTwoWords = currentPath.split("-");
+        currentPathWithTwoWords = currentPathWithTwoWords.join(" ");
+        return (
+          currentPathWithTwoWords[0].toUpperCase() +
+          currentPathWithTwoWords.slice(1)
+        );
+      }
       return currentPath[0].toUpperCase() + currentPath.slice(1);
     },
   },

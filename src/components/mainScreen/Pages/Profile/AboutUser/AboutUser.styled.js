@@ -10,7 +10,7 @@ export const DataContainer = styled.div`
 export const DataRow = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 35px;
+  // height: 35px;
 `;
 
 export const DataItem = styled.div`
@@ -23,10 +23,13 @@ export const DataItem = styled.div`
 `;
 export const Label = styled.div`
   font-size: 20px;
+  flex: 0 1 30%;
 `;
 export const Data = styled.div`
   font-size: 20px;
   font-weight: bold;
+  flex: 1 0 70%;
+  text-align: end;
 `;
 
 export const ChangeButtonsContainer = styled.div`
@@ -43,4 +46,10 @@ export const ChangeButtonsSubContainer = styled.div`
 export const CustomButton = styled(Button)`
   background: ${({ saving }) => saving && "#6cff5c"};
   color: ${({ saving }) => saving && "#000"};
+`;
+
+export const TreatmentInfoContainer = styled.div`
+  div:nth-child(1) {
+    margin-bottom: 20px;
+  }
 `;

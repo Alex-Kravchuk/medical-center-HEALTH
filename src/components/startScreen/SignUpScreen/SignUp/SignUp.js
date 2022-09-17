@@ -2,19 +2,18 @@ import React, { useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-
-import { LoadingOutlined } from "@ant-design/icons";
+import ScreenHeader from "../../ScreeHeader/ScreenHeader";
 
 import {
-  Container,
-  CustomizeLink,
-  DontHaveAccount,
-  LoadingScreen,
   Wrapper,
+  Container,
+  LoadingIcon,
+  CustomizeLink,
+  LoadingScreen,
+  DontHaveAccount,
 } from "../../Styles/Screen.styled";
 
 import FormSignUp from "../FormSignUp/FormSignUp";
-import HeaderSignUp from "../HeaderSignUp/HeaderSignUp";
 
 const SignUp = () => {
   const { user, loading, atention } = useSelector((state) => state.auth);
@@ -30,16 +29,16 @@ const SignUp = () => {
   });
   return (
     <Wrapper signUp>
-      <Container loading={loading.toString()}>
-        <HeaderSignUp />
+      <Container>
+        <ScreenHeader error={atention} type="signUp" />
         <FormSignUp loading={loading.toString()} />
         <DontHaveAccount>
           Already have an account? <CustomizeLink to="/">Log in</CustomizeLink>
         </DontHaveAccount>
       </Container>
       {loading && (
-        <LoadingScreen>
-          <LoadingOutlined style={{ fontSize: "48px", color: "green" }} />
+        <LoadingScreen loading={loading.toString()}>
+          <LoadingIcon />
         </LoadingScreen>
       )}
     </Wrapper>

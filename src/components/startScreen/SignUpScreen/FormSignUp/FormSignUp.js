@@ -4,21 +4,30 @@ import { Form } from "antd";
 import { useDispatch } from "react-redux";
 
 import {
-  createLabel,
+  CustomizeInput,
   CustomizeButton,
   CustomizeCheckbox,
-  CustomizeInput,
   CustomizePasswordInput,
 } from "../../Styles/Form.styled";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { signUpAction } from "../../../../redux/authReducer/actions/signUp";
 
+import CreateLabel from "../../CreateLabel";
+
+const INPUT_RULE = [
+  {
+    required: true,
+    message: "Please fill in this field",
+  },
+];
+
 const FormSignUp = () => {
   const dispatch = useDispatch();
+
   const onFinish = (values) => {
     console.log(values);
-    dispatch(signUpAction({ ...values, type: "signup" }));
+    dispatch(signUpAction({ ...values, role: "client" }));
   };
 
   return (
@@ -34,53 +43,40 @@ const FormSignUp = () => {
     >
       <Form.Item
         name="name"
-        label={createLabel("NAME")}
-        rules={[
-          {
-            required: true,
-            message: "Please input your email address!",
-          },
-        ]}
+        label={<CreateLabel text="name" />}
+        rules={INPUT_RULE}
       >
-        <CustomizeInput placeholder="Your name" />
+        <CustomizeInput placeholder="Your name" autoComplete={"new-password"} />
       </Form.Item>
       <Form.Item
         name="surname"
-        label={createLabel("SURNAME")}
-        rules={[
-          {
-            required: true,
-            message: "Please input your email address!",
-          },
-        ]}
+        label={<CreateLabel text="surname" />}
+        rules={INPUT_RULE}
       >
-        <CustomizeInput placeholder="Your surname" />
+        <CustomizeInput
+          placeholder="Your surname"
+          autoComplete={"new-password"}
+        />
       </Form.Item>
       <Form.Item
         name="email"
-        label={createLabel("EMAIL")}
-        rules={[
-          {
-            required: true,
-            message: "Please input your email address!",
-          },
-        ]}
+        label={<CreateLabel text="email" />}
+        rules={INPUT_RULE}
       >
-        <CustomizeInput placeholder="Email address" />
+        <CustomizeInput
+          placeholder="Email address"
+          autoComplete={"new-password"}
+        />
       </Form.Item>
       <Form.Item
         name="password"
-        label={createLabel("PASSWORD")}
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
+        label={<CreateLabel text="password" />}
+        rules={INPUT_RULE}
       >
         <CustomizePasswordInput
           type="password"
           placeholder="Password"
+          autoComplete={"new-password"}
           iconRender={(visible) =>
             visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
           }
@@ -102,3 +98,5 @@ const FormSignUp = () => {
 };
 
 export default FormSignUp;
+
+// TODO Form.Item points like array maybe

@@ -23,9 +23,5 @@ export const makeShorterImageName = (file, saveUrl) => {
     newName = newName.join("");
   }
 
-  //   const newFile = Object.assign({}, file);
-  //   debugger;
-  //   newFile.name = newName;
-  //   uploadImage(file, saveUrl);
   return newName;
 };

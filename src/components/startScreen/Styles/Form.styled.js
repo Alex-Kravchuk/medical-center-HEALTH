@@ -1,43 +1,31 @@
 import styled, { css } from "styled-components";
 import { Input, Button, Checkbox } from "antd";
 
-export const createLabel = (text, password) =>
-  password ? (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%",
-      }}
-    >
-      <Label>{text}</Label>
-      <Label password>
-        <a>Forgot password?</a>
-      </Label>
-    </div>
-  ) : (
-    <Label>{text}</Label>
-  );
+export const PasswordLabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
 
 export const CustomizeInput = styled(Input)`
   height: 50px;
   border-radius: 8px;
-  background: #f7f7fb;
+  // background: #f7f7fb;
 
   @media (max-height: 700px) {
     height: 40px;
   }
-  
 `;
-
+// #e8f0fe #f7f7fb
 export const CustomizePasswordInput = styled(Input.Password)`
   height: 50px;
   border-radius: 8px;
-  background: #f0f1f7;
-  input {
-    background: #f0f1f7;
-  }
+  // background: #f7f7fb;
+  // input {
+  //   background: #f7f7fb;
+  // }
 
   @media (max-height: 700px) {
     height: 40px;

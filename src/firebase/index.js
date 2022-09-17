@@ -1,12 +1,8 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC6hdRmyzXAJ2YCUspvS8GfsoNLWpUfiZE",
