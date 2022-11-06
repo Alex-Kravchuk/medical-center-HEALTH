@@ -18,6 +18,8 @@ import { defineUserRole } from "../../../../../auxiliary functions/defineUserRol
 
 import EditableCell from "../EditableCell";
 import SideDrawer from "./SideDrawer/SideDrawer";
+import { determineWhatHasChanged } from "../../../../../auxiliary functions/determineWhatHasChanged";
+import { createAndSendingNotification } from "../../../../../auxiliary functions/createAndSendingNotification";
 
 const Admissions = () => {
   const [form] = Form.useForm();
@@ -44,6 +46,7 @@ const Admissions = () => {
   }, [location]);
 
   useEffect(() => {
+    let isMounted = true;
     const dbRef = ref(database, `users/${userRole}/` + uid);
 
     onValue(dbRef, (snapshot) => {
@@ -51,9 +54,13 @@ const Admissions = () => {
         const data = snapshot.val();
         const { admissions } = data;
         const mutatedAdmissions = mutateDate(admissions ?? [], false);
-        setData(mutatedAdmissions);
+
+        if (isMounted) {
+          setData(mutatedAdmissions);
+        }
       }
     });
+    return () => (isMounted = false);
   }, []);
 
   const onCloseSideDrawer = () => setSideDrawerVisible(false);
@@ -89,7 +96,6 @@ const Admissions = () => {
   const save = async (record) => {
     try {
       const row = await form.validateFields();
-
       const newData = [...data];
       const index = newData.findIndex((item) => item.id === record.id);
       setEditingId("");
@@ -106,6 +112,9 @@ const Admissions = () => {
         setEditingId("");
         sendAdmissionsChanges(user, newData, userRole, record);
       }
+
+      const changedData = determineWhatHasChanged(user, record, row);
+      createAndSendingNotification(record.userId, changedData);
     } catch (error) {
       console.log("Validate failed", error);
     }

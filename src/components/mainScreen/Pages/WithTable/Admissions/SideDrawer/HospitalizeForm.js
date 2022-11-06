@@ -7,6 +7,9 @@ import { Form, Input, Button } from "antd";
 import { setDataToDataBase } from "../../../../../../firebase/setDataToDataBase";
 import { getDataFromDataBase } from "../../../../../../firebase/getDataFromDataBase";
 
+import { defineTypeOfNotification } from "../../../../../../auxiliary functions/defineTypeOfNotification";
+import { createAndSendingNotification } from "../../../../../../auxiliary functions/createAndSendingNotification";
+
 import { ButtonBlock, ErrorWithDuplicate, FormItem } from "./SideDrawer.styled";
 
 const HospitalizeForm = ({ admission, onClose }) => {
@@ -75,6 +78,14 @@ const HospitalizeForm = ({ admission, onClose }) => {
     setDataToDataBase(pathForSetTreatment, treatmentData);
     setDataToDataBase(pathForChangeAdmissionStatus, "ended");
     setDataToDataBase(pathForChangeAppointmentStatus, "ended");
+
+    // make notification
+    const notificationTemplate = defineTypeOfNotification("hospitalization", {
+      name: therapist,
+    });
+
+    createAndSendingNotification(userId, notificationTemplate);
+
     onClose();
   };
 

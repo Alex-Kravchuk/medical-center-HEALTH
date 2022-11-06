@@ -6,6 +6,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const { SubMenu } = Menu;
 
 export const CustomizeMenu = styled(Menu)`
+  .ant-menu-item {
+    &:hover {
+      background: #fff;
+    }
+  }
+
+  .ant-menu-submenu-title {
+    a {
+      color: #000;
+    }
+
+    &:hover {
+      background: #fff;
+
+      a {
+        color: #1890ff;
+      }
+    }
+  }
+  .ant-menu-title-content {
+    font-size: 16px;
+
+    a:hover {
+      color: #1890ff;
+    }
+  }
+
   background: #e1e5f2;
 `;
 

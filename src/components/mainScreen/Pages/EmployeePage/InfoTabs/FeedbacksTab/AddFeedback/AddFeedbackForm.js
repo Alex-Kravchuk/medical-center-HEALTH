@@ -2,6 +2,8 @@ import { Button, Form, Input } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { createAndSendingNotification } from "../../../../../../../auxiliary functions/createAndSendingNotification";
+import { defineTypeOfNotification } from "../../../../../../../auxiliary functions/defineTypeOfNotification";
 import { getDataFromDataBase } from "../../../../../../../firebase/getDataFromDataBase";
 import { setDataToDataBase } from "../../../../../../../firebase/setDataToDataBase";
 
@@ -16,12 +18,13 @@ const AddFeedbackForm = ({
 
   const [form] = useForm();
 
-  const onSendFeedback = async (values) => {
+  const feedbackAuthorName = `${name} ${surname}`;
 
+  const onSendFeedback = async (values) => {
     setLoadingSending(true);
     const path = `users/doctors/${doctorUID}/feedbacks/${numberOfFeedback}`;
     const feedback = {
-      author: `${name} ${surname}`,
+      author: feedbackAuthorName,
       avatarURL: avatarURL ?? null,
       date: moment(new Date()).format("YYYY-MM-DD"),
       time: new Date().getTime(),
@@ -29,6 +32,13 @@ const AddFeedbackForm = ({
     };
     await setDataToDataBase(path, feedback);
     setLoadingSending(false);
+
+    // make notification
+    const notificationTemplate = defineTypeOfNotification("feedback", {
+      name: feedbackAuthorName,
+    });
+
+    createAndSendingNotification(doctorUID, notificationTemplate);
     form.resetFields();
   };
   return (

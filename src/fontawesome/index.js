@@ -13,7 +13,11 @@ import {
   faChevronRight,
   faBriefcaseMedical,
   faEnvelopeOpenText,
+  faEyeSlash,
+  faDiamondTurnRight,
+  faComment,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Settings = faCog;
 export const News = faNewspaper;
@@ -29,3 +33,6 @@ export const RightArrow = faChevronRight;
 export const MobilePhoneIcon = faMobileAlt;
 export const EmailIcon = faEnvelopeOpenText;
 export const specializationIcon = faBriefcaseMedical;
+export const HideIcon = faEyeSlash;
+export const RedicrectIcon = faDiamondTurnRight;
+export const FeedbackIcon = faComment;

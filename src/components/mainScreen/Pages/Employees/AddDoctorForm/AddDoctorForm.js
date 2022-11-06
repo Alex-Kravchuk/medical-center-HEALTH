@@ -12,7 +12,7 @@ const AddDoctorForm = ({
 }) => {
   return (
     <Modal
-      visible={visible}
+      open={visible}
       confirmLoading={confirmLoading}
       title="Add a new doctor"
       okText="Add"

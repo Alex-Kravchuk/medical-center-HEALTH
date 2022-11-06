@@ -28,6 +28,7 @@ const EmployeePage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const doctorData = location.state;
+  const { pathname } = location;
 
   const {
     name,
@@ -38,14 +39,14 @@ const EmployeePage = () => {
     phoneNumber,
     about,
     uid,
+    fromNotifications,
   } = doctorData;
 
   const doctorName = name + " " + surname;
 
   useEffect(() => {
-    const { pathname } = location;
     dispatch(changePageName({ pathname }));
-  }, []);
+  }, [pathname, dispatch]);
 
   return (
     <Wrapper>
@@ -67,6 +68,7 @@ const EmployeePage = () => {
             email={email}
             currentDoctorUID={uid}
             about={about}
+            fromNotifications={fromNotifications}
           />
         </InfoBlock>
       </Container>

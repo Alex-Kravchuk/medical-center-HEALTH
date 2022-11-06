@@ -17,6 +17,8 @@ import { sendPatientChanges } from "./sendPatientChanges";
 
 import { createFilters } from "../createFilters";
 import { defineUserRole } from "../../../../../auxiliary functions/defineUserRole";
+import { determineWhatHasChanged } from "../../../../../auxiliary functions/determineWhatHasChanged";
+import { createAndSendingNotification } from "../../../../../auxiliary functions/createAndSendingNotification";
 
 const Patients = () => {
   const [form] = Form.useForm();
@@ -39,15 +41,20 @@ const Patients = () => {
   }, [location]);
 
   useEffect(() => {
+    let isMounted = true;
     const dbRef = ref(database, `users/${userRole}/` + uid);
 
     onValue(dbRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
         const { patients } = data;
-        setData(patients);
+        if (isMounted) {
+          setData(patients);
+        }
       }
     });
+
+    return () => (isMounted = false);
   }, [userRole, uid]);
 
   const isEditing = (record) => record.id === editingId;
@@ -87,6 +94,10 @@ const Patients = () => {
         setEditingId("");
         sendPatientChanges(uid, newData[id]);
       }
+
+      const changedData = determineWhatHasChanged(user, record, row);
+
+      createAndSendingNotification(record.userId, changedData);
     } catch (error) {
       console.log("Validate failed", error);
     }

@@ -18,6 +18,7 @@ import {
 import photoNotFound from "../../../images/photo-not-found.png";
 import { signOutAction } from "../../../redux/authReducer/actions/signOut";
 import { Link } from "react-router-dom";
+import Notifications from "../Notifications/Notifications";
 
 const HeaderHomePage = ({ collapse }) => {
   const { user, loading, atention } = useSelector((state) => state.auth);
@@ -29,23 +30,12 @@ const HeaderHomePage = ({ collapse }) => {
     dispatch(signOutAction());
   };
 
-  // TODO I'm gona make here some new logic for notification component
-
   return (
-    <CustomizeHeaderHomePage
-      collapse={collapse.toString()}
-    >
+    <CustomizeHeaderHomePage collapse={collapse.toString()}>
       <Wrapper>
         <PageName>{currentPage}</PageName>
         <AboutUser>
-          <Tooltip placement="left" title="Notifications">
-            <HeaderNotification>
-              <Badge count={1}>
-                <CustomAvatar icon={<BellOutlined />} />
-              </Badge>
-            </HeaderNotification>
-          </Tooltip>
-
+          <Notifications />
           <UserName>
             {name} {surname}
           </UserName>

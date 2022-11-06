@@ -7,22 +7,37 @@ import FeedbacksTab from "./FeedbacksTab/FeedbacksTab";
 import { InfoTabItem } from "../EmployeePage.styled";
 import { TabsWrapper, TabTitle } from "./InfoTabs.styled";
 
-const { TabPane } = Tabs;
-
-const DoctorInfoTabs = ({ phone, email, currentDoctorUID, about }) => {
+const DoctorInfoTabs = ({
+  phone,
+  email,
+  currentDoctorUID,
+  about,
+  fromNotifications,
+}) => {
+  const tabItems = [
+    {
+      label: <TabTitle>Contact</TabTitle>,
+      key: "1",
+      children: <ContactTab email={email} phone={phone} />,
+    },
+    {
+      label: <TabTitle>More about doctor</TabTitle>,
+      key: "2",
+      children: <InfoTabItem>{about}</InfoTabItem>,
+    },
+    {
+      label: <TabTitle>Feedbacks</TabTitle>,
+      key: "3",
+      children: <FeedbacksTab doctorUID={currentDoctorUID} />,
+    },
+  ];
   return (
     <TabsWrapper>
-      <Tabs defaultActiveKey="2" size="large">
-        <TabPane tab={<TabTitle>Contact</TabTitle>} key="1">
-          <ContactTab email={email} phone={phone} />
-        </TabPane>
-        <TabPane tab={<TabTitle>More about doctor</TabTitle>} key="2">
-          <InfoTabItem>{about}</InfoTabItem>
-        </TabPane>
-        <TabPane tab={<TabTitle>Feedbacks</TabTitle>} key="3">
-          <FeedbacksTab doctorUID={currentDoctorUID} />
-        </TabPane>
-      </Tabs>
+      <Tabs
+        defaultActiveKey={fromNotifications ? "3" : "2"}
+        size="large"
+        items={tabItems}
+      />
     </TabsWrapper>
   );
 };

@@ -26,7 +26,7 @@ const SideDrawer = ({ onClose, visible, admission }) => {
   return (
     <Drawer
       onClose={onClose}
-      visible={visible}
+      open={visible}
       placement="right"
       size="large"
       title="Details of visit"

@@ -29,7 +29,7 @@ const ForgotPassword = () => {
 
   const sendResetEmailHandler = () => {
     setError("");
-    const email = emailRef.current.state.value;
+    const email = emailRef.current.input.value;
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setSuccessfulySent(true);

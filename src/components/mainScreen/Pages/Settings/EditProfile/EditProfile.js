@@ -40,6 +40,7 @@ const EditProfile = () => {
     feedbacks,
     about,
     appointments,
+    admissions,
   } = useSelector((state) => state.auth.user);
 
   const userRole = defineUserRole(role);
@@ -74,6 +75,7 @@ const EditProfile = () => {
       about: values.about ?? null,
       feedbacks: feedbacks ?? null,
       appointments: appointments ?? null,
+      admissions: admissions ?? null,
       uid,
     };
 

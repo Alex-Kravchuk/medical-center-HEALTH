@@ -9,30 +9,19 @@ import SelectDoctorButton from "./SelectDoctorButton";
 import Placeholder from "../../Profile/Avatar/Placeholder";
 
 import { CardWrapper, CustomDoctorCard, DoctorImg } from "./Doctor.styled";
+import { defineCorrectRouteName } from "../../../../../auxiliary functions/defineCorrectRouteName";
 
 const { Meta } = Card;
 
 const Doctor = ({ doctorData, uid, linksAreDisabled, canBeChosen }) => {
   const { name, surname, avatarURL, specialization } = doctorData;
 
-  const defineCorrectRouteName = () => {
-    if (linksAreDisabled) return "#";
-    const nameArray = name.split(" ");
-
-    if (nameArray.length === 1) {
-      return `${name}-${surname}`;
-    }
-
-    if (nameArray.length > 1) {
-      const newName = nameArray.join("-");
-      return `${newName}-${surname}`;
-    }
-  };
+  const routeName = defineCorrectRouteName(`${name} ${surname}`, linksAreDisabled);
 
   const dataForRedirect = { ...doctorData, uid };
   return (
     <CardWrapper>
-      <Link to={defineCorrectRouteName()} state={dataForRedirect}>
+      <Link to={routeName} state={dataForRedirect}>
         <CustomDoctorCard
           hoverable
           cover={

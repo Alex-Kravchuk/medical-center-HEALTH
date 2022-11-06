@@ -20,6 +20,8 @@ import { sendAppointmentsChanges } from "./sendAppointmentsChanges";
 import { createApointmentsFilters } from "./createApointmentsFilters";
 
 import { defineUserRole } from "../../../../../auxiliary functions/defineUserRole";
+import { determineWhatHasChanged } from "../../../../../auxiliary functions/determineWhatHasChanged";
+import { createAndSendingNotification } from "../../../../../auxiliary functions/createAndSendingNotification";
 
 const Appointments = () => {
   const [form] = Form.useForm();
@@ -42,6 +44,7 @@ const Appointments = () => {
   }, [location]);
 
   useEffect(() => {
+    let isMounted = true;
     const dbRef = ref(database, `users/${userRole}/` + uid);
 
     onValue(dbRef, (snapshot) => {
@@ -49,9 +52,13 @@ const Appointments = () => {
         const data = snapshot.val();
         const { appointments } = data;
         const mutatedAppointments = mutateDate(appointments ?? [], false);
-        setData(mutatedAppointments);
+        if (isMounted) {
+          setData(mutatedAppointments);
+        }
       }
     });
+
+    return () => (isMounted = false);
   }, []);
 
   const isEditing = (record) => record.id === editingId;
@@ -91,6 +98,9 @@ const Appointments = () => {
         setEditingId("");
         sendAppointmentsChanges(user, newData, userRole, record);
       }
+
+      const changedData = determineWhatHasChanged(user, record, row);
+      createAndSendingNotification(record.userId, changedData);
     } catch (error) {
       console.log("Validate failed", error);
     }

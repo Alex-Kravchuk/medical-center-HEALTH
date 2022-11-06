@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import moment from "moment";
+
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -13,6 +15,9 @@ import {
 
 import { setDataToDataBase } from "../../../../../firebase/setDataToDataBase";
 import { getDataFromDataBase } from "../../../../../firebase/getDataFromDataBase";
+
+import { defineTypeOfNotification } from "../../../../../auxiliary functions/defineTypeOfNotification";
+import { createAndSendingNotification } from "../../../../../auxiliary functions/createAndSendingNotification";
 
 const StepsControlButton = ({
   handlerToNext,
@@ -80,6 +85,20 @@ const StepsControlButton = ({
       admissionId: numberOfAdmissons,
       userId: doctor.uid,
     };
+
+    // make notification
+    const notificationData = {
+      name: `${user.name} ${user.surname}`,
+      date,
+      time: moment(time).format("hh:mm a"),
+    };
+
+    const notificationTemplate = defineTypeOfNotification(
+      "appointment",
+      notificationData
+    );
+
+    createAndSendingNotification(doctor.uid, notificationTemplate);
 
     await setDataToDataBase(pathForDoctors, admission);
     await setDataToDataBase(pathForUsers, appointment);

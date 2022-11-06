@@ -24,9 +24,8 @@ const FeedbacksTab = ({ doctorUID }) => {
         const feedbacks = snapshot.val();
         setNumberOfFeedback(feedbacks.length);
         setFeedbacks(feedbacks);
-        setLoadingFeedbacks(false);
       }
-      //   probably, need some warning message here, when something wrong with fethcing
+      setLoadingFeedbacks(false);
     });
   }, []);
 
