@@ -1,5 +1,5 @@
 {
-  "homepage": "https://Alex-Kravchuk.github.io/medical-center-HEALTH",
+  "homepage": "https://Alex-Kravchuk.github.io",
   "name": "medical_center",
   "version": "0.1.0",
   "private": true,
@@ -26,9 +26,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b build",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

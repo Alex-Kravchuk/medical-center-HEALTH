@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 import { auth } from "../../../firebase";
 
-import logInIcon from "../../../images/health-insurance.png";
+import logInIcon from "../../../images/logo.png";
 
 import { CustomizeInput } from "../Styles/Form.styled";
 import { Container, Wrapper } from "../Styles/Screen.styled";

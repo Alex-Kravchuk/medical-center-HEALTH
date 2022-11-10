@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import logInIcon from "../../../images/health-insurance.png";
+import logInIcon from "../../../images/logo.png";
 
 import { Header, Icon, SubTitle, Title } from "../Styles/Header.styled";
 

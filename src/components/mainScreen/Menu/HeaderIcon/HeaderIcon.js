@@ -1,6 +1,6 @@
 import React from "react";
 
-import appIcon from "../../../../images/health-insurance.png";
+import appIcon from "../../../../images/logo.png";
 import { Container, Icon, Wrapper, Title } from "./HeaderIcon.styled";
 
 const HeaderIcon = ({ collapse }) => {
